@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<!-- filters -->
+    <filter>
+        <filter-name>CommonFilter</filter-name>
+        <filter-class>web.lib.filter.CommonFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>RequestFilter</filter-name>
+        <filter-class>web.lib.filter.RequestFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>ResponseFilter</filter-name>
+        <filter-class>web.lib.filter.ResponseFilter</filter-class>
+    </filter>
+<!-- filter mappings -->
+    <filter-mapping>
+        <filter-name>CommonFilter</filter-name>
+        <url-pattern>/index.jsp/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RequestFilter</filter-name>
+        <url-pattern>/index.jsp/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ResponseFilter</filter-name>
+        <url-pattern>/index.jsp/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CommonFilter</filter-name>
+        <url-pattern>/dev.jsp/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RequestFilter</filter-name>
+        <url-pattern>/dev.jsp/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ResponseFilter</filter-name>
+        <url-pattern>/dev.jsp/*</url-pattern>
+    </filter-mapping>
+<!-- servlets -->
+    <servlet>
+        <servlet-name>ProductionDispatcherServlet</servlet-name>
+        <servlet-class>web.lib.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>env</param-name>
+            <param-value>prod</param-value>
+        </init-param>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>off</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>DevelopmentDispatcherServlet</servlet-name>
+        <servlet-class>web.lib.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>env</param-name>
+            <param-value>dev</param-value>
+        </init-param>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>on</param-value>
+        </init-param>
+    </servlet>
+<!-- servlet mappings -->
+    <servlet-mapping>
+        <servlet-name>ProductionDispatcherServlet</servlet-name>
+        <url-pattern>/index.jsp/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevelopmentDispatcherServlet</servlet-name>
+        <url-pattern>/dev.jsp/*</url-pattern>
+    </servlet-mapping>
+<!-- configuration -->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+	<welcome-file>
+            index.jsp
+        </welcome-file>
+    </welcome-file-list>
+</web-app>
